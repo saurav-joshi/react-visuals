@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import shelfs from './BookShelf'
-//import BookShelf from './BookShelf';
+import {shelfs} from './BookShelf'
   
 class BookShelfOrchestrator extends React.Component{
 
@@ -67,9 +66,7 @@ class BookShelfOrchestrator extends React.Component{
     render() {
         
         const {myData, shelfName, onEditBookShelf} = this.props;
-        let bookDetails = myData;
-        let resultSet;
-        
+        let bookDetails = myData;    
         if(shelfName !== "None")
         {
         bookDetails= myData.filter((data)=> data.shelf.toLowerCase() === shelfName);
@@ -77,10 +74,12 @@ class BookShelfOrchestrator extends React.Component{
 
         const listItems = bookDetails.map( (book)=> this.arrangeBookShelf(book, shelfName, onEditBookShelf) );
         
-        shelfName === "None" ? resultSet = this.displaySearchResults(listItems) 
-                                                    : resultSet =  this.displayBookShelfs (listItems, shelfs[shelfName])
+        const resultSet = (shelfName === "None") 
+            ? this.displaySearchResults(listItems) 
+            : this.displayBookShelfs (listItems, shelfs[shelfName])
 
-        return resultSet;
+        return resultSet
+
     }
 }
 
