@@ -33,11 +33,10 @@ class BookShelfOrchestrator extends React.Component{
         );
     }
 
-    addNavigation = (book, onEditBookShelf) =>{
-        
+    addNavigation = (book, shelfName, onEditBookShelf) =>{
         return (
         <div className="book-shelf-changer">
-            <select onChange={(value) => onEditBookShelf(value, book)} >
+            <select value={shelfs[shelfName]} onChange={(value) => onEditBookShelf(value, book)} >
             <option value="none" >Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
@@ -54,7 +53,7 @@ class BookShelfOrchestrator extends React.Component{
             <div className="book" key={book.id} >
             <div className="book-top">
             <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${bookUrl})` }} > </div>
-                {this.addNavigation(book, onEditBookShelf)}
+                {this.addNavigation(book, shelfName, onEditBookShelf)}
             </div>
             <div className="book-title">{book.title}</div>
             <div className="book-authors">{book.authors}</div>
